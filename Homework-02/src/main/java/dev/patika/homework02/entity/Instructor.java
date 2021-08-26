@@ -1,5 +1,6 @@
 package dev.patika.homework02.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
@@ -32,6 +33,7 @@ public class Instructor {
     private double salary;
 
     @OneToMany(mappedBy = "instructor")
+    @JsonIgnore
     private List<Course> courses;
 
 }

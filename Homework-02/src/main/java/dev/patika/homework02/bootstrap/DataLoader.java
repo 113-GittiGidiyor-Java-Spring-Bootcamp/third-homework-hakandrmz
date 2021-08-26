@@ -9,8 +9,6 @@ import dev.patika.homework02.service.InstructorService;
 import dev.patika.homework02.service.StudentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

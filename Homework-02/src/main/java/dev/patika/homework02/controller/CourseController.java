@@ -16,7 +16,6 @@ import java.util.List;
 public class CourseController {
 
     private final CourseService courseService;
-    private final StudentService studentService;
 
     @GetMapping("course/edit/{id}")
     public String getCourse(@PathVariable int id, Model model){

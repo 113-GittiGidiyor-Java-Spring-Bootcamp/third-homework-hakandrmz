@@ -1,5 +1,6 @@
 package dev.patika.homework02.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -29,6 +30,7 @@ public class Student {
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "students")
     @ToString.Exclude
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     @Override
