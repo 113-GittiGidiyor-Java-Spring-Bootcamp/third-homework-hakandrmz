@@ -1,44 +1,38 @@
 package dev.patika.homework02.controller;
 
 import dev.patika.homework02.entity.Course;
-import dev.patika.homework02.entity.Student;
 import dev.patika.homework02.service.CourseService;
-import dev.patika.homework02.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class CourseController {
 
     private final CourseService courseService;
 
-    @GetMapping("course/edit/{id}")
-    public String getCourse(@PathVariable int id, Model model){
+    @GetMapping("course/{id}")
+    public Course getCourse(@PathVariable int id){
         Course course = courseService.findById(id);
-        List<Student> students = course.getStudents();
-        model.addAttribute("course",course);
-        model.addAttribute("students",students);
-        return "courses/edit";
+        return course;
     }
 
     @GetMapping("course/delete/{id}")
-    public String deleteCourse(@PathVariable int id){
+    public HttpStatus deleteCourse(@PathVariable int id){
         courseService.deleteById(id);
-        return "redirect:/index";
+        return HttpStatus.OK;
     }
 
     @PostMapping("course/update/{id}")
-    public String updateCourse(@PathVariable int id,Course course){
-        Course willUpdateCourse = courseService.findById(course.getId());
+    public Course updateCourse(@PathVariable int id,@RequestBody Course course){
+        Course willUpdateCourse = courseService.findById(id);
+        System.out.println(course.getCourseCode());
         willUpdateCourse.setName(course.getName());
         willUpdateCourse.setCourseCode(course.getCourseCode());
+        willUpdateCourse.setCredit(course.getCredit());
         courseService.save(willUpdateCourse);
-        return "redirect:/index";
+        return willUpdateCourse;
     }
 
 }

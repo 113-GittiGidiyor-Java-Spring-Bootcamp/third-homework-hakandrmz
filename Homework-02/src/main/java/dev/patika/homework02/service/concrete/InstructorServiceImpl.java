@@ -1,6 +1,6 @@
 package dev.patika.homework02.service.concrete;
 
-import dev.patika.homework02.dao.InstructorDao;
+import dev.patika.homework02.repository.InstructorDao;
 import dev.patika.homework02.entity.Instructor;
 import dev.patika.homework02.service.InstructorService;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,5 @@ public class InstructorServiceImpl implements InstructorService {
     public void update(Instructor instructor) {
         instructorDao.save(instructor);
     }
-
 
 }

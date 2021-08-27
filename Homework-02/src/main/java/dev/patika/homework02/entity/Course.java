@@ -1,5 +1,6 @@
 package dev.patika.homework02.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,9 +32,11 @@ public class Course {
             joinColumns = { @JoinColumn(name = "course_id") },
             inverseJoinColumns = { @JoinColumn(name = "student_id") }
     )
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.ALL})
+    @JsonIgnore
     private Instructor instructor;
 
 }

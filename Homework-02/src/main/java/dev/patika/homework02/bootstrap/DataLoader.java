@@ -29,6 +29,27 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        instructorService.save(Instructor.builder()
+                .name("Şener")
+                .address("Bursa")
+                .phoneNumber("5432112341")
+                .salary(1111.0)
+                .type(InstructorType.VISITING).build());
+        instructorService.save(Instructor.builder()
+                .name("Drogba")
+                .address("Bursa")
+                .phoneNumber("5432112341")
+                .salary(112323.0)
+                .type(InstructorType.VISITING).build());
+        instructorService.save(Instructor.builder()
+                .name("Yuli")
+                .address("Bursa")
+                .phoneNumber("5432112341")
+                .salary(11211.0)
+                .type(InstructorType.VISITING).build());
+
+
+
         List<Student> Course1Students = new ArrayList<>();
         Course1Students.add(Student.builder().name("Sabri").address("Bursa").
                 birthDate(LocalDate.of(1996,01,7)).gender("M").build());

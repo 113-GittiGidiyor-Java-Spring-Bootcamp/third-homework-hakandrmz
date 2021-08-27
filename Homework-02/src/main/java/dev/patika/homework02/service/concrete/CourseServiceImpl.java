@@ -1,6 +1,6 @@
 package dev.patika.homework02.service.concrete;
 
-import dev.patika.homework02.dao.CourseDao;
+import dev.patika.homework02.repository.CourseDao;
 import dev.patika.homework02.entity.Course;
 import dev.patika.homework02.service.CourseService;
 import org.springframework.stereotype.Service;
