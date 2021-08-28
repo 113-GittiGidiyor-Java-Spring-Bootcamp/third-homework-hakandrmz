@@ -51,20 +51,20 @@ public class DataLoader implements CommandLineRunner {
 
 
         List<Student> Course1Students = new ArrayList<>();
-        Course1Students.add(Student.builder().name("Sabri").address("Bursa").
-                birthDate(LocalDate.of(1996,01,7)).gender("M").build());
+        Course1Students.add(Student.builder().name("Melike").address("Bursa").
+                birthDate(LocalDate.of(1996,01,7)).gender("F").build());
         Course1Students.add(Student.builder().name("Özgür").address("Londra").
                 birthDate(LocalDate.of(1995,02,7)).gender("M").build());
-        Course1Students.add(Student.builder().name("Aydemir").address("Bukres").
+        Course1Students.add(Student.builder().name("Derya").address("Bukres").
                 birthDate(LocalDate.of(1994,03,7)).gender("M").build());
 
         List<Student> Course2Students = new ArrayList<>();
         Course2Students.add(Student.builder().name("Hakan").address("Kutahya").
-                birthDate(LocalDate.of(1999,05,7)).gender("M").build());
+                birthDate(LocalDate.of(1999,05,7)).gender("F").build());
         Course2Students.add(Student.builder().name("Emre").address("Kayseri").
                 birthDate(LocalDate.of(1998,06,7)).gender("M").build());
-        Course2Students.add(Student.builder().name("Salih").address("Konya").
-                birthDate(LocalDate.of(1997,07,7)).gender("M").build());
+        Course2Students.add(Student.builder().name("Deniz").address("Konya").
+                birthDate(LocalDate.of(1997,07,7)).gender("F").build());
 
         courseService.save(Course.builder()
                 .courseCode("CS101")

@@ -7,8 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,6 +44,18 @@ public class StudentController {
     public HttpStatus deleteStudent(@PathVariable int id){
         studentService.deleteById(id);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/getGendersWithGrouping")
+    public List<?> getAgesWithGrouping(){
+        return studentService.getGendersWithGrouping();
+    }
+
+
+    @GetMapping("/deleteStudentByName/{name}")
+    public String deleteStudentByName(@PathVariable String name){
+        studentService.deleteByName(name);
+        return name + " içeren isimler silindi";
     }
 
 }

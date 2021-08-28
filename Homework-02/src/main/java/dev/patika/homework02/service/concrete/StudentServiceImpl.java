@@ -4,6 +4,7 @@ import dev.patika.homework02.repository.StudentRepository;
 import dev.patika.homework02.entity.Student;
 import dev.patika.homework02.service.StudentService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,5 +40,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void update(Student student) {
         studentRepository.save(student);
+    }
+
+    public List<?> getGendersWithGrouping() {
+        return studentRepository.getGendersWithGrouping();
+    }
+
+    @Override
+    @Transactional
+    public void deleteByName(String name) {
+        studentRepository.deleteByName(name);
     }
 }
