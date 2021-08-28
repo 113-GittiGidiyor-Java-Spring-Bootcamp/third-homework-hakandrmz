@@ -4,6 +4,7 @@ import dev.patika.homework02.entity.Course;
 import dev.patika.homework02.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,9 +14,14 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping("course/{id}")
-    public Course getCourse(@PathVariable int id){
+    public ResponseEntity<Course> getCourse(@PathVariable int id){
         Course course = courseService.findById(id);
-        return course;
+        return new ResponseEntity(course,HttpStatus.OK);
+    }
+
+    @GetMapping("courses")
+    public ResponseEntity<Course> getAllCourse(){
+        return new ResponseEntity(courseService.findAll(),HttpStatus.OK);
     }
 
     @GetMapping("course/delete/{id}")
@@ -24,10 +30,15 @@ public class CourseController {
         return HttpStatus.OK;
     }
 
-    @PostMapping("course/update/{id}")
-    public Course updateCourse(@PathVariable int id,@RequestBody Course course){
-        Course willUpdateCourse = courseService.findById(id);
-        System.out.println(course.getCourseCode());
+    @DeleteMapping("course/delete")
+    public ResponseEntity<Course> deleteCourse(@RequestBody Course course) {
+        courseService.deleteById(course.getId());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping("course/update")
+    public Course updateCourse(@RequestBody Course course){
+        Course willUpdateCourse = courseService.findById(course.getId());
         willUpdateCourse.setName(course.getName());
         willUpdateCourse.setCourseCode(course.getCourseCode());
         willUpdateCourse.setCredit(course.getCredit());

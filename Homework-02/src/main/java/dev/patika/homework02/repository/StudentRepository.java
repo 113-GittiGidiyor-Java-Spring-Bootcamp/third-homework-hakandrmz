@@ -1,10 +1,9 @@
 package dev.patika.homework02.repository;
 
-import dev.patika.homework02.entity.Instructor;
+import dev.patika.homework02.entity.Student;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InstructorDao extends CrudRepository<Instructor,Integer> {
-
+public interface StudentRepository extends CrudRepository<Student,Integer> {
 }

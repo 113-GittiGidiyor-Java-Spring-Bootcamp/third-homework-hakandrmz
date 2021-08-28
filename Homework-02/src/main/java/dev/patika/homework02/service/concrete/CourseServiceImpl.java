@@ -1,6 +1,6 @@
 package dev.patika.homework02.service.concrete;
 
-import dev.patika.homework02.repository.CourseDao;
+import dev.patika.homework02.repository.CourseRepository;
 import dev.patika.homework02.entity.Course;
 import dev.patika.homework02.service.CourseService;
 import org.springframework.stereotype.Service;
@@ -10,34 +10,34 @@ import java.util.List;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    private final CourseDao courseDao;
+    private final CourseRepository courseRepository;
 
-    public CourseServiceImpl(CourseDao courseDao) {
-        this.courseDao = courseDao;
+    public CourseServiceImpl(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
     @Override
     public List<Course> findAll() {
-        return (List<Course>) courseDao.findAll();
+        return (List<Course>) courseRepository.findAll();
     }
 
     @Override
     public Course findById(int id) {
-        return courseDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student id :" + id));
+        return courseRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid course id :" + id));
     }
 
     @Override
     public Course save(Course course) {
-        return courseDao.save(course);
+        return courseRepository.save(course);
     }
 
     @Override
     public void deleteById(int id) {
-        courseDao.deleteById(id);
+        courseRepository.deleteById(id);
     }
 
     @Override
     public void update(Course course) {
-        courseDao.save(course);
+        courseRepository.save(course);
     }
 }

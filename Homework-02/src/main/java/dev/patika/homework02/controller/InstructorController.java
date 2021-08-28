@@ -1,21 +1,14 @@
 package dev.patika.homework02.controller;
 
+import dev.patika.homework02.entity.Course;
 import dev.patika.homework02.entity.Instructor;
-import dev.patika.homework02.entity.InstructorType;
-import dev.patika.homework02.entity.Student;
 import dev.patika.homework02.service.InstructorService;
-import dev.patika.homework02.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -23,16 +16,27 @@ public class InstructorController {
 
     private final InstructorService instructorService;
 
-    @PostMapping("/instructor/update/{id}")
-    public HttpStatus updateInstructor(@PathVariable int id,@RequestBody Instructor instructor){
-        Instructor foundInstructor = instructorService.findById(id);
+    @GetMapping("instructors")
+    public ResponseEntity<Course> getAllInstructor(){
+        return new ResponseEntity(instructorService.findAll(),HttpStatus.OK);
+    }
+
+    @PutMapping("instructor/update")
+    public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor){
+        Instructor foundInstructor = instructorService.findById(instructor.getId());
         foundInstructor.setName(instructor.getName());
         foundInstructor.setAddress(instructor.getAddress());
         foundInstructor.setPhoneNumber(instructor.getPhoneNumber());
         foundInstructor.setSalary(instructor.getSalary());
         foundInstructor.setType(instructor.getType());
         instructorService.save(foundInstructor);
-        return HttpStatus.OK;
+        return new ResponseEntity<>(foundInstructor,HttpStatus.OK);
+    }
+
+    @DeleteMapping("instructor")
+    public ResponseEntity<Course> deleteCourse(@RequestBody Instructor instructor) {
+        instructorService.deleteById(instructor.getId());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/instructor/delete/{id}")
@@ -43,7 +47,6 @@ public class InstructorController {
 
     @GetMapping("/instructor/findFirst3BySalary")
     public List<Instructor> getFindFirst3BySalary(){
-        double i=0;
         return null;
     }
 

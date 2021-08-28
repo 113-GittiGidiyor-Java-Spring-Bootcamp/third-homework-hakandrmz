@@ -1,10 +1,10 @@
-package currency.secondmodule;
+package com.convert.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SecondModuleApplicationTests {
+class DemoApplicationTests {
 
     @Test
     void contextLoads() {
