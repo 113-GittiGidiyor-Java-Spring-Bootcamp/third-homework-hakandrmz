@@ -36,15 +36,15 @@ public class InstructorController {
     }
 
     @GetMapping("/instructor/delete/{id}")
-    public String deleteInstructor(@PathVariable int id){
+    public HttpStatus deleteInstructor(@PathVariable int id){
         instructorService.deleteById(id);
-        return "redirect:/index";
+        return HttpStatus.OK;
     }
 
     @GetMapping("/instructor/findFirst3BySalary")
     public List<Instructor> getFindFirst3BySalary(){
         double i=0;
-        return instructorService.findFirst3BySalary(i);
+        return null;
     }
 
 }
