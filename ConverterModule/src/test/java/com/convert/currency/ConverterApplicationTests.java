@@ -1,10 +1,10 @@
-package com.convert.demo;
+package com.convert.currency;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class ConverterApplicationTests {
 
     @Test
     void contextLoads() {

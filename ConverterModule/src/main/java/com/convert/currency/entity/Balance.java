@@ -1,4 +1,4 @@
-package com.convert.demo.entity;
+package com.convert.currency.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
