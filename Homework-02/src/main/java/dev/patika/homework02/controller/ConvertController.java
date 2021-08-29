@@ -15,14 +15,22 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class ConvertController {
 
-    private final static String ENDPOINT = "http://localhost:8081/convert/";
+    private final static String ENDPOINT = "http://localhost:8081/";
 
     RestTemplate restTemplate = new RestTemplate();
 
-    @GetMapping("/convert/{balance}")
-    public ResponseEntity getConvertedBalance(@PathVariable double balance) throws JsonProcessingException {
-        Balance convertedBalance = restTemplate.getForObject(ENDPOINT+balance,Balance.class);
+    @GetMapping("/convertToUsd/{balance}")
+    public ResponseEntity convertToUsd(@PathVariable double balance) throws JsonProcessingException {
+        Balance convertedBalance = restTemplate.getForObject(ENDPOINT+"convertToUsd/"+balance,Balance.class);
         return new ResponseEntity<>(convertedBalance, HttpStatus.OK);
     }
+
+    @GetMapping("/convertToTl/{balance}")
+    public ResponseEntity convertToTl(@PathVariable double balance) throws JsonProcessingException {
+        Balance convertedBalance = restTemplate.getForObject(ENDPOINT+"convertToTl/"+balance,Balance.class);
+        return new ResponseEntity<>(convertedBalance, HttpStatus.OK);
+    }
+
+
 
 }

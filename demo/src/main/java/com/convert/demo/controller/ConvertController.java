@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConvertController {
 
-    @GetMapping("/convert/{balance}")
-    public ResponseEntity getConvertedBalance(@PathVariable double balance){
+    @GetMapping("/convertToTl/{balance}")
+    public ResponseEntity convertToTl(@PathVariable double balance){
         balance = balance*8.43;
-        System.out.println(balance);
+        return new ResponseEntity(new Balance(balance),HttpStatus.OK);
+
+    }
+
+    @GetMapping("/convertToUsd/{balance}")
+    public ResponseEntity convertToUsd(@PathVariable double balance){
+        balance = balance/8.43;
         return new ResponseEntity(new Balance(balance),HttpStatus.OK);
 
     }
