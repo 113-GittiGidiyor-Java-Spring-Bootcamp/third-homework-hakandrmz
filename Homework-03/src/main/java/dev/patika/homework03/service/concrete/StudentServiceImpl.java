@@ -39,6 +39,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void update(Student student) {
+        Student foundStudent = studentRepository.findById(student.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid student id :" + student.getId()));
+        foundStudent.setName(student.getName());
+        foundStudent.setAddress(student.getAddress());
+        foundStudent.setGender(student.getGender());
         studentRepository.save(student);
     }
 
@@ -50,5 +54,10 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public void deleteByName(String name) {
         studentRepository.deleteByName(name);
+    }
+
+    @Override
+    public List<Student> search(String word) {
+        return studentRepository.search(word);
     }
 }

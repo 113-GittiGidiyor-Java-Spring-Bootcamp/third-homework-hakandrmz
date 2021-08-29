@@ -1,6 +1,8 @@
 package dev.patika.homework03.controller;
 
 import dev.patika.homework03.entity.Course;
+import dev.patika.homework03.entity.Instructor;
+import dev.patika.homework03.entity.Student;
 import dev.patika.homework03.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,15 +15,16 @@ public class CourseController {
 
     private final CourseService courseService;
 
+    @GetMapping("courses")
+    public ResponseEntity<Course> getAllCourse(){
+        return new ResponseEntity(courseService.findAll(),HttpStatus.OK);
+    }
+
+
     @GetMapping("course/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable int id){
         Course course = courseService.findById(id);
         return new ResponseEntity(course,HttpStatus.OK);
-    }
-
-    @GetMapping("courses")
-    public ResponseEntity<Course> getAllCourse(){
-        return new ResponseEntity(courseService.findAll(),HttpStatus.OK);
     }
 
     @GetMapping("course/delete/{id}")
@@ -37,13 +40,20 @@ public class CourseController {
     }
 
     @PutMapping("course/update")
-    public Course updateCourse(@RequestBody Course course){
-        Course willUpdateCourse = courseService.findById(course.getId());
-        willUpdateCourse.setName(course.getName());
-        willUpdateCourse.setCourseCode(course.getCourseCode());
-        willUpdateCourse.setCredit(course.getCredit());
-        courseService.save(willUpdateCourse);
-        return willUpdateCourse;
+    public ResponseEntity updateCourse(@RequestBody Course course){
+        courseService.update(course);
+        return new ResponseEntity("Course Updated",HttpStatus.OK);
+    }
+
+    @PostMapping("course/new")
+    public ResponseEntity<Course> addCourse(@RequestBody Course course){
+        courseService.save(course);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("course/search/{word}")
+    public ResponseEntity<Course> searchCourse(@PathVariable String word){
+        return new ResponseEntity(courseService.search(word),HttpStatus.OK);
     }
 
 }

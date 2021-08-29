@@ -2,7 +2,9 @@ package dev.patika.homework03.controller;
 
 import dev.patika.homework03.entity.Course;
 import dev.patika.homework03.entity.Instructor;
+import dev.patika.homework03.entity.Student;
 import dev.patika.homework03.service.InstructorService;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +22,10 @@ public class InstructorController {
         return new ResponseEntity(instructorService.findAll(),HttpStatus.OK);
     }
 
-    @PutMapping("instructor/update")
-    public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor){
-        Instructor foundInstructor = instructorService.findById(instructor.getId());
-        foundInstructor.setName(instructor.getName());
-        foundInstructor.setAddress(instructor.getAddress());
-        foundInstructor.setPhoneNumber(instructor.getPhoneNumber());
-        foundInstructor.setSalary(instructor.getSalary());
-        foundInstructor.setType(instructor.getType());
-        instructorService.save(foundInstructor);
-        return new ResponseEntity<>(foundInstructor,HttpStatus.OK);
-    }
-
-    @DeleteMapping("instructor")
-    public ResponseEntity<Course> deleteCourse(@RequestBody Instructor instructor) {
-        instructorService.deleteById(instructor.getId());
-        return new ResponseEntity(HttpStatus.OK);
+    @GetMapping("instructor/{id}")
+    public ResponseEntity<Instructor> getInstructor(@PathVariable int id){
+        Instructor instructor = instructorService.findById(id);
+        return new ResponseEntity<>(instructor,HttpStatus.OK);
     }
 
     @GetMapping("/instructor/delete/{id}")
@@ -44,6 +34,27 @@ public class InstructorController {
         return HttpStatus.OK;
     }
 
+    @PutMapping("instructor/update")
+    public ResponseEntity<Instructor> updateInstructor(@RequestBody Instructor instructor){
+        instructorService.update(instructor);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
+    @DeleteMapping("instructor")
+    public ResponseEntity<Instructor> deleteCourse(@RequestBody Instructor instructor) {
+        instructorService.deleteById(instructor.getId());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("instructor/new")
+    public ResponseEntity addInstructor(@RequestBody Instructor instructor){
+        instructorService.save(instructor);
+        return new ResponseEntity("Instructor saved",HttpStatus.OK);
+    }
+
+    @GetMapping("instructor/search/{word}")
+    public ResponseEntity<Student> searchStudent(@PathVariable String word){
+        return new ResponseEntity(instructorService.search(word),HttpStatus.OK);
+    }
 
 }

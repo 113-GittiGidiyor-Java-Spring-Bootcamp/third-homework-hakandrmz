@@ -8,4 +8,5 @@ public interface BaseService<T> {
      T save(T object);
      void deleteById(int id);
      void update(T t);
+
 }

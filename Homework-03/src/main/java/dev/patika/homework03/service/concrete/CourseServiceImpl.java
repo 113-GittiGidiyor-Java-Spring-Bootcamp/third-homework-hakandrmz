@@ -38,6 +38,16 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void update(Course course) {
+        Course willUpdateCourse = courseRepository.findById(course.getId()).orElseThrow(() -> new IllegalArgumentException());
+        willUpdateCourse.setName(course.getName());
+        willUpdateCourse.setCourseCode(course.getCourseCode());
+        willUpdateCourse.setCredit(course.getCredit());
         courseRepository.save(course);
+    }
+
+
+    @Override
+    public List<Course> search(String word) {
+        return courseRepository.search(word);
     }
 }

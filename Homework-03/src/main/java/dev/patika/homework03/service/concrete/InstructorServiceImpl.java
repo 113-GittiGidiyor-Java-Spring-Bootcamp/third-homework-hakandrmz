@@ -38,7 +38,18 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public void update(Instructor instructor) {
+        Instructor foundInstructor = instructorRepository.findById(instructor.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid student id :" + instructor.getId()));
+        foundInstructor.setName(instructor.getName());
+        foundInstructor.setAddress(instructor.getAddress());
+        foundInstructor.setPhoneNumber(instructor.getPhoneNumber());
+        foundInstructor.setSalary(instructor.getSalary());
+        foundInstructor.setType(instructor.getType());
         instructorRepository.save(instructor);
     }
 
+
+    @Override
+    public List<Instructor> search(String word) {
+        return instructorRepository.search(word);
+    }
 }
