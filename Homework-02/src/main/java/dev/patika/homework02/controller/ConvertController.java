@@ -15,14 +15,13 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class ConvertController {
 
-    private final static String ENDPOINT = "http://localhost:8081/";
+    private final static String ENDPOINT = "http://localhost:8081/convert/";
 
-    RestTemplate restTemplate;
+    RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("/convert/{balance}")
     public ResponseEntity getConvertedBalance(@PathVariable double balance) throws JsonProcessingException {
-        String url = ENDPOINT+"convert/"+balance;
-        ResponseEntity<String> convertedBalance = restTemplate.getForEntity("http://localhost:8081/convert/6",String.class);
+        Balance convertedBalance = restTemplate.getForObject(ENDPOINT+balance,Balance.class);
         return new ResponseEntity<>(convertedBalance, HttpStatus.OK);
     }
 

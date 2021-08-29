@@ -12,7 +12,6 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
 
     @Query("select s.gender, count(s.gender) from Student s GROUP BY s.gender")
     List<?> getGendersWithGrouping();
-
     void deleteByName(String name);
 
 }

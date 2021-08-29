@@ -40,7 +40,7 @@ public class DataLoader implements CommandLineRunner {
                 .address("Bursa")
                 .phoneNumber("5432112341")
                 .salary(112323.0)
-                .type(InstructorType.VISITING).build());
+                .type(InstructorType.PERMANENT).build());
         instructorService.save(Instructor.builder()
                 .name("Yuli")
                 .address("Bursa")

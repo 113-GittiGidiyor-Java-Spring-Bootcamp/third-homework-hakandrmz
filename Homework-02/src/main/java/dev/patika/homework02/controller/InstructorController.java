@@ -45,9 +45,6 @@ public class InstructorController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("/instructor/findFirst3BySalary")
-    public List<Instructor> getFindFirst3BySalary(){
-        return null;
-    }
+
 
 }

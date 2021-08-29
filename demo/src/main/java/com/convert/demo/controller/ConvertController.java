@@ -13,7 +13,8 @@ public class ConvertController {
 
     @GetMapping("/convert/{balance}")
     public ResponseEntity getConvertedBalance(@PathVariable double balance){
-
+        balance = balance*8.43;
+        System.out.println(balance);
         return new ResponseEntity(new Balance(balance),HttpStatus.OK);
 
     }
